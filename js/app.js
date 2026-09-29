@@ -33,6 +33,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 10. Consultation Page Proposal Form Submission
   initConsultationPageForm();
+
+  // 11. Subpage Dynamic Background Hero Controller
+  initSubpageHero();
+
+  // 12. Active Nav Page Highlighting
+  initActiveNavLink();
+
+  // 13. Sticky Navbar Scroll State
+  initNavScrollState();
 });
 
 /* --------------------------------------------------------------------------
@@ -179,38 +188,211 @@ function initSidebarDrawer() {
 }
 
 /* --------------------------------------------------------------------------
-   2. Hero Video Controller
+   2. Hero Video & Interactive Inspection Slideshow Controller
 -------------------------------------------------------------------------- */
 function initHeroVideo() {
+  const heroSection = document.getElementById('heroSection');
   const video = document.getElementById('heroVideo');
   const toggleBtn = document.getElementById('videoToggleBtn');
   const toggleText = document.getElementById('videoToggleText');
   const toggleIcon = document.getElementById('videoToggleIcon');
+  const backdrop = document.getElementById('heroCinematicBg');
+  const sceneIntel = document.getElementById('heroSceneIntel');
+  const slideDots = document.querySelectorAll('.hero-slide-dot');
+  const slideCounter = document.getElementById('heroSlideCounter');
 
-  if (!video || !toggleBtn) return;
+  // Inspection & Training Slides Catalog (6 Real Technical Scenarios)
+  const inspectionSlides = [
+    {
+      image: 'assets/hero-scaffold-training.jpg',
+      thumb: 'assets/scaffold-inspection-closeup.jpg',
+      badge: 'Live Site Verification',
+      title: 'BS EN 74 Scaffold Safety & Erection Inspection',
+      desc: 'Dubai Municipality Compliant • EIAC Accredited • SWL 12kN',
+      tag: 'Scaffold Safety Inspection & Training (1 / 6)'
+    },
+    {
+      image: 'assets/inspections/cranes-inspection.jpg',
+      thumb: 'assets/inspections/cranes-inspection.jpg',
+      badge: 'Heavy Plant & Lifting',
+      title: 'Mobile, Crawler & Tower Crane Proof Load Testing',
+      desc: 'EIAC Accredited • Calibrated Water Bags & Solid Weights • DAC Certified',
+      tag: 'Crane Proof Load Testing (2 / 6)'
+    },
+    {
+      image: 'assets/inspections/bollard-pull-marine.jpg',
+      thumb: 'assets/inspections/bollard-pull-marine.jpg',
+      badge: 'Marine & Offshore Proof',
+      title: 'Offshore Marine Bollard Pull & Winch Load Certification',
+      desc: 'Calibrated 200T Load Cell • Dynamic Tension Testing • Maritime Standards',
+      tag: 'Marine Bollard Pull Proof (3 / 6)'
+    },
+    {
+      image: 'assets/training/rigging-slinging.jpg',
+      thumb: 'assets/training/rigging-slinging.jpg',
+      badge: 'Competency Training',
+      title: 'Lifting & Rigging Competency Certification (Levels 1–3)',
+      desc: 'KHDA Approved • LOLER / BS 7121 Signals • Safe Working Load Assessment',
+      tag: 'Rigging Competency Training (4 / 6)'
+    },
+    {
+      image: 'assets/inspections/ndt-testing.jpg',
+      thumb: 'assets/inspections/ndt-testing.jpg',
+      badge: 'Non-Destructive Testing',
+      title: 'NDT Ultrasonic, MPI & Dye Penetrant Flaw Detection',
+      desc: 'ISO 9712 Level II Inspectors • Weld Joint Integrity • Structural Verification',
+      tag: 'NDT Flaw Detection & Weld Integrity (5 / 6)'
+    },
+    {
+      image: 'assets/inspections/bmu-cradle-inspection.jpg',
+      thumb: 'assets/inspections/bmu-cradle-inspection.jpg',
+      badge: 'Facade & Height Safety',
+      title: 'BMU Building Cradle & Suspended Access Proof Testing',
+      desc: 'EN 1808 Standard • Fall Arrest Systems • Emergency Descent Verification',
+      tag: 'Window & BMU Cradle Certification (6 / 6)'
+    }
+  ];
 
-  toggleBtn.addEventListener('click', () => {
-    if (video.paused) {
-      video.play();
-      if (toggleText) toggleText.textContent = 'Pause Video';
-      if (toggleIcon) {
-        toggleIcon.innerHTML = `
-          <rect x="6" y="4" width="4" height="16" fill="currentColor"></rect>
-          <rect x="14" y="4" width="4" height="16" fill="currentColor"></rect>
-        `;
-      }
-      toggleBtn.setAttribute('aria-label', 'Pause background video');
-    } else {
-      video.pause();
-      if (toggleText) toggleText.textContent = 'Play Video';
-      if (toggleIcon) {
-        toggleIcon.innerHTML = `
-          <polygon points="5 3 19 12 5 21 5 3" fill="currentColor"></polygon>
-        `;
-      }
-      toggleBtn.setAttribute('aria-label', 'Play background video');
+  // Preload all slideshow images for instant butter-smooth transitions
+  inspectionSlides.forEach(slide => {
+    const img = new Image();
+    img.src = slide.image;
+    if (slide.thumb) {
+      const thumbImg = new Image();
+      thumbImg.src = slide.thumb;
     }
   });
+
+  let currentSlideIndex = 0;
+  let autoSlideTimer = null;
+  const AUTO_SLIDE_DELAY = 6000; // 6 seconds per slide
+
+  function applySlide(index) {
+    if (!backdrop) return;
+    currentSlideIndex = (index + inspectionSlides.length) % inspectionSlides.length;
+    const slide = inspectionSlides[currentSlideIndex];
+
+    // Smooth crossfade backdrop
+    backdrop.style.opacity = '0.35';
+
+    // If video was playing, pause it to showcase the inspection photo
+    if (video && !video.paused) {
+      video.pause();
+      video.classList.remove('video-playing');
+      if (toggleText) toggleText.textContent = 'Play Video Loop';
+      if (toggleIcon) {
+        toggleIcon.innerHTML = `<polygon points="5 3 19 12 5 21 5 3" fill="currentColor"></polygon>`;
+      }
+    }
+
+    setTimeout(() => {
+      backdrop.style.backgroundImage = `url('${slide.image}')`;
+      backdrop.style.opacity = '1';
+    }, 200);
+
+    // Update Floating Scene Intel Card
+    if (sceneIntel) {
+      const thumbEl = sceneIntel.querySelector('.hero-scene-thumb img');
+      const badgeEl = sceneIntel.querySelector('.hero-scene-badge');
+      const titleEl = sceneIntel.querySelector('.hero-scene-title');
+      const descEl = sceneIntel.querySelector('.hero-scene-desc');
+
+      if (thumbEl) {
+        thumbEl.src = slide.thumb;
+        thumbEl.alt = slide.title;
+      }
+      if (badgeEl) badgeEl.textContent = slide.badge;
+      if (titleEl) titleEl.textContent = slide.title;
+      if (descEl) descEl.textContent = slide.desc;
+    }
+
+    // Update Dots Navigation
+    slideDots.forEach((dot, dotIdx) => {
+      const isActive = dotIdx === currentSlideIndex;
+      dot.classList.toggle('active', isActive);
+      dot.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+
+    // Update Hint Counter
+    if (slideCounter) {
+      slideCounter.textContent = `Click hero to change • ${slide.tag}`;
+    }
+  }
+
+  function nextSlide() {
+    applySlide(currentSlideIndex + 1);
+  }
+
+  function restartAutoTimer() {
+    if (autoSlideTimer) clearInterval(autoSlideTimer);
+    autoSlideTimer = setInterval(nextSlide, AUTO_SLIDE_DELAY);
+  }
+
+  // Start automatic slideshow
+  restartAutoTimer();
+
+  // Click on hero dots
+  slideDots.forEach(dot => {
+    dot.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const targetIndex = parseInt(dot.getAttribute('data-slide'), 10);
+      if (!isNaN(targetIndex)) {
+        applySlide(targetIndex);
+        restartAutoTimer();
+      }
+    });
+  });
+
+  // Click on technical scene intel card
+  if (sceneIntel) {
+    sceneIntel.addEventListener('click', (e) => {
+      e.stopPropagation();
+      nextSlide();
+      restartAutoTimer();
+    });
+  }
+
+  // Click anywhere on hero section to change to next inspection image
+  // (Ignoring clicks on action buttons, links, inputs, and video controls)
+  if (heroSection) {
+    heroSection.addEventListener('click', (e) => {
+      if (e.target.closest('a, button, input, select, textarea, .nav-container')) {
+        return;
+      }
+      nextSlide();
+      restartAutoTimer();
+    });
+  }
+
+  // Video play/pause toggle controller
+  if (video && toggleBtn) {
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (video.paused) {
+        video.play().then(() => {
+          video.classList.add('video-playing');
+          if (toggleText) toggleText.textContent = 'Pause Video Loop';
+          if (toggleIcon) {
+            toggleIcon.innerHTML = `
+              <rect x="6" y="4" width="4" height="16" fill="currentColor"></rect>
+              <rect x="14" y="4" width="4" height="16" fill="currentColor"></rect>
+            `;
+          }
+          toggleBtn.setAttribute('aria-label', 'Pause background video');
+        }).catch(err => console.log('Autoplay blocked or play error:', err));
+      } else {
+        video.pause();
+        video.classList.remove('video-playing');
+        if (toggleText) toggleText.textContent = 'Play Video Loop';
+        if (toggleIcon) {
+          toggleIcon.innerHTML = `
+            <polygon points="5 3 19 12 5 21 5 3" fill="currentColor"></polygon>
+          `;
+        }
+        toggleBtn.setAttribute('aria-label', 'Play background video');
+      }
+    });
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -592,6 +774,181 @@ function initConsultationPageForm() {
       }
     }, 850);
   });
+}
+
+/* --------------------------------------------------------------------------
+   11. Subpage Dynamic Background Hero Controller
+-------------------------------------------------------------------------- */
+function initSubpageHero() {
+  const subpageHero = document.getElementById('subpageHero');
+  const backdrop = document.getElementById('subpageHeroBg');
+  if (!subpageHero || !backdrop) return;
+
+  // Detect which subpage we are on
+  const isInspections = subpageHero.classList.contains('hero-inspections');
+  const isTraining = subpageHero.classList.contains('hero-training');
+  const isConsultation = subpageHero.classList.contains('hero-consultation');
+
+  let slides = [];
+  if (isInspections) {
+    slides = [
+      'assets/inspections/cranes-inspection.jpg',
+      'assets/inspections/bollard-pull-marine.jpg',
+      'assets/inspections/ndt-testing.jpg',
+      'assets/inspections/bmu-cradle-inspection.jpg',
+      'assets/inspections/chain-hoist-inspection.jpg'
+    ];
+  } else if (isTraining) {
+    slides = [
+      'assets/hero-scaffold-training.jpg',
+      'assets/training/work-at-heights.jpg',
+      'assets/training/rigging-slinging.jpg',
+      'assets/training/confined-space.jpg',
+      'assets/training/forklift-operator.jpg',
+      'assets/training/fire-fighting.jpg'
+    ];
+  } else if (isConsultation) {
+    slides = [
+      'assets/hero-poster.jpg',
+      'assets/inspections/bollard-pull-marine.jpg',
+      'assets/inspections/cranes-inspection.jpg',
+      'assets/hero-scaffold-training.jpg'
+    ];
+  }
+
+  if (!slides.length) return;
+
+  // Preload slides for smooth transitions
+  slides.forEach(src => {
+    const img = new Image();
+    img.src = src;
+  });
+
+  let currentIdx = 0;
+  let subpageTimer = null;
+
+  function setSlide(idx) {
+    currentIdx = (idx + slides.length) % slides.length;
+    backdrop.style.opacity = '0.35';
+    setTimeout(() => {
+      backdrop.style.backgroundImage = `url('${slides[currentIdx]}')`;
+      backdrop.style.opacity = '1';
+    }, 200);
+  }
+
+  function nextSlide() {
+    setSlide(currentIdx + 1);
+  }
+
+  function startTimer() {
+    if (subpageTimer) clearInterval(subpageTimer);
+    subpageTimer = setInterval(nextSlide, 7000);
+  }
+
+    startTimer();
+
+  // Allow clicking anywhere on hero (except links/buttons) to switch background image
+  subpageHero.addEventListener('click', (e) => {
+    if (e.target.closest('a, button, input, select, textarea')) return;
+    nextSlide();
+    startTimer();
+  });
+}
+
+/* --------------------------------------------------------------------------
+   12. Active Nav Link Highlighting — marks current page in navigation
+-------------------------------------------------------------------------- */
+function initActiveNavLink() {
+  const currentPath = window.location.pathname;
+  let currentPage = currentPath.split('/').pop();
+  if (!currentPage || currentPage === '' || currentPage === '/') {
+    currentPage = 'index.html';
+  }
+
+  const allNavLinks = document.querySelectorAll('.nav-link, .nav-link-dropdown-btn');
+
+  // Clear any pre-existing active states
+  allNavLinks.forEach(link => link.classList.remove('active'));
+
+  if (currentPage === 'index.html') {
+    // 1. Initial active is Home
+    const homeLink = document.querySelector('.nav-link[href="index.html"]');
+    if (homeLink) homeLink.classList.add('active');
+
+    // 2. Scroll spy for section anchors: #about, #why-us, #contact
+    const sectionIds = ['about', 'why-us', 'contact'];
+    const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+
+    if (sections.length > 0 && 'IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const currentId = entry.target.id;
+            allNavLinks.forEach(link => {
+              const href = link.getAttribute('href') || '';
+              if (href.endsWith('#' + currentId)) {
+                link.classList.add('active');
+              } else if (!href.includes('#') && currentId === '') {
+                link.classList.add('active');
+              } else {
+                link.classList.remove('active');
+              }
+            });
+          }
+        });
+      }, { rootMargin: '-25% 0px -65% 0px', threshold: 0.1 });
+
+      sections.forEach(sec => observer.observe(sec));
+
+      // Reset to Home when scrolled near the top (hero area)
+      window.addEventListener('scroll', () => {
+        if (window.scrollY < 250) {
+          allNavLinks.forEach(link => {
+            const href = link.getAttribute('href') || '';
+            if (href === 'index.html') {
+              link.classList.add('active');
+            } else {
+              link.classList.remove('active');
+            }
+          });
+        }
+      }, { passive: true });
+    }
+  } else {
+    // Inner pages: highlight only the matching page link
+    allNavLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href) return;
+      const linkBase = href.split('/').pop().split('#')[0];
+      if (linkBase === currentPage) {
+        link.classList.add('active');
+      }
+    });
+  }
+}
+
+/* --------------------------------------------------------------------------
+   13. Sticky Navbar Scroll State — adds .is-scrolled on scroll
+-------------------------------------------------------------------------- */
+function initNavScrollState() {
+  const nav = document.querySelector('.main-nav');
+  if (!nav) return;
+
+  const SCROLL_THRESHOLD = 60; // px from top before class is added
+
+  function checkScroll() {
+    if (window.scrollY > SCROLL_THRESHOLD) {
+      nav.classList.add('is-scrolled');
+    } else {
+      nav.classList.remove('is-scrolled');
+    }
+  }
+
+  // Listen to scroll event (passive for performance)
+  window.addEventListener('scroll', checkScroll, { passive: true });
+
+  // Run once on load in case page is scrolled already (e.g. via anchor)
+  checkScroll();
 }
 
 
