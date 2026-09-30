@@ -204,20 +204,28 @@ function initHeroVideo() {
   // Inspection & Training Slides Catalog (6 Real Technical Scenarios)
   const inspectionSlides = [
     {
-      image: 'assets/hero-scaffold-training.jpg',
-      thumb: 'assets/scaffold-inspection-closeup.jpg',
-      badge: 'Live Site Verification',
-      title: 'BS EN 74 Scaffold Safety & Erection Inspection',
-      desc: 'Dubai Municipality Compliant • EIAC Accredited • SWL 12kN',
-      tag: 'Scaffold Safety Inspection & Training (1 / 6)'
+      image: 'assets/hero-crane-inspection-hd.jpg',
+      thumb: 'assets/hero-crane-inspection-hd.jpg',
+      badge: 'Heavy Lifting & Cranes',
+      title: 'Heavy Crane Proof Load & Rigging Inspection',
+      desc: 'EIAC & ENAS Accredited • Calibrated Test Weights & Shackles',
+      tag: 'Crane Proof Load & Rigging (1 / 6)'
     },
     {
-      image: 'assets/inspections/cranes-inspection.jpg',
-      thumb: 'assets/inspections/cranes-inspection.jpg',
-      badge: 'Heavy Plant & Lifting',
-      title: 'Mobile, Crawler & Tower Crane Proof Load Testing',
-      desc: 'EIAC Accredited • Calibrated Water Bags & Solid Weights • DAC Certified',
-      tag: 'Crane Proof Load Testing (2 / 6)'
+      image: 'assets/hero-safety-training-hd.jpg',
+      thumb: 'assets/hero-safety-training-hd.jpg',
+      badge: 'HSE Competency Training',
+      title: 'Work at Heights & Fall Protection Training',
+      desc: 'KHDA Approved • Harness Inspection & 100% Tie-Off Compliance',
+      tag: 'Fall Protection & Safety Training (2 / 6)'
+    },
+    {
+      image: 'assets/hero-industrial-safety-hd.jpg',
+      thumb: 'assets/hero-industrial-safety-hd.jpg',
+      badge: 'Site Safety Audit',
+      title: 'Third-Party Structural & Equipment Safety Verification',
+      desc: 'ISO / IEC 17020 Inspection Standards • Certified Safety Engineers',
+      tag: 'Structural Safety Verification (3 / 6)'
     },
     {
       image: 'assets/inspections/bollard-pull-marine.jpg',
@@ -225,15 +233,7 @@ function initHeroVideo() {
       badge: 'Marine & Offshore Proof',
       title: 'Offshore Marine Bollard Pull & Winch Load Certification',
       desc: 'Calibrated 200T Load Cell • Dynamic Tension Testing • Maritime Standards',
-      tag: 'Marine Bollard Pull Proof (3 / 6)'
-    },
-    {
-      image: 'assets/training/rigging-slinging.jpg',
-      thumb: 'assets/training/rigging-slinging.jpg',
-      badge: 'Competency Training',
-      title: 'Lifting & Rigging Competency Certification (Levels 1–3)',
-      desc: 'KHDA Approved • LOLER / BS 7121 Signals • Safe Working Load Assessment',
-      tag: 'Rigging Competency Training (4 / 6)'
+      tag: 'Marine Bollard Pull Proof (4 / 6)'
     },
     {
       image: 'assets/inspections/ndt-testing.jpg',
