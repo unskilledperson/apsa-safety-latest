@@ -269,7 +269,7 @@ img, video {
   letter-spacing: -0.025em;
   margin-bottom: 16px;
   color: var(--apsa-black);
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.2;
 }
 
@@ -1574,7 +1574,7 @@ img, video {
 
 .hero-title {
   font-size: clamp(1.75rem, 3.2vw, 2.45rem);
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.025em;
   line-height: 1.2;
   color: var(--white);
@@ -1802,7 +1802,7 @@ img, video {
 .about-stat-num {
   font-family: var(--font-heading);
   font-size: 1.85rem;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--apsa-purple);
   line-height: 1.1;
 }
@@ -2053,7 +2053,7 @@ img, video {
   color: #0F172A;
   font-family: var(--font-heading);
   font-size: 1.16rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.015em;
   line-height: 1.35;
   margin-bottom: 9px;
@@ -2282,7 +2282,7 @@ img, video {
 .why-matrix-num {
   font-family: var(--font-heading);
   font-size: 3rem;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--apsa-purple);
   line-height: 1;
   margin-bottom: 10px;
@@ -2497,7 +2497,7 @@ img, video {
 .approval-name {
   font-family: var(--font-heading);
   font-size: 0.95rem;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--apsa-black);
   letter-spacing: 0.02em;
   line-height: 1.2;
@@ -3313,7 +3313,7 @@ img, video {
 .contact-section-title {
   font-family: var(--font-heading);
   font-size: 2.35rem;
-  font-weight: 800;
+  font-weight: 700;
   margin-bottom: 14px;
   color: var(--apsa-black);
   letter-spacing: -0.02em;
@@ -3449,7 +3449,7 @@ img, video {
 .subpage-title {
   font-family: var(--font-heading);
   font-size: clamp(2rem, 3.6vw, 2.85rem);
-  font-weight: 800;
+  font-weight: 700;
   color: #FFFFFF;
   line-height: 1.2;
   margin: 16px 0 14px 0;
@@ -3486,7 +3486,7 @@ img, video {
 
 .subpage-stat-val {
   font-size: 1.55rem;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--apsa-purple-light);
   line-height: 1.1;
   font-family: var(--font-heading);
@@ -3654,7 +3654,7 @@ img, video {
 .modern-contact-title {
   font-family: var(--font-heading);
   font-size: 2.15rem;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.22;
   color: #FFFFFF;
   letter-spacing: -0.02em;
@@ -3992,7 +3992,7 @@ img, video {
 .modern-form-title {
   font-family: var(--font-heading);
   font-size: 1.85rem;
-  font-weight: 800;
+  font-weight: 700;
   color: #FFFFFF !important;
   margin: 0 0 10px 0;
   line-height: 1.25;
