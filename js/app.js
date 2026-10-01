@@ -188,208 +188,78 @@ function initSidebarDrawer() {
 }
 
 /* --------------------------------------------------------------------------
-   2. Hero Video & Interactive Inspection Slideshow Controller
+   2. Hero Video Controller (Pure Video-First Hero)
 -------------------------------------------------------------------------- */
 function initHeroVideo() {
-  const heroSection = document.getElementById('heroSection');
   const video = document.getElementById('heroVideo');
   const toggleBtn = document.getElementById('videoToggleBtn');
   const toggleText = document.getElementById('videoToggleText');
   const toggleIcon = document.getElementById('videoToggleIcon');
-  const backdrop = document.getElementById('heroCinematicBg');
-  const sceneIntel = document.getElementById('heroSceneIntel');
-  const slideDots = document.querySelectorAll('.hero-slide-dot');
-  const slideCounter = document.getElementById('heroSlideCounter');
 
-  // Inspection & Training Slides Catalog (6 Real Technical Scenarios)
-  const inspectionSlides = [
-    {
-      image: 'assets/hero-crane-inspection-hd.jpg',
-      thumb: 'assets/hero-crane-inspection-hd.jpg',
-      badge: 'Heavy Lifting & Cranes',
-      title: 'Heavy Crane Proof Load & Rigging Inspection',
-      desc: 'EIAC Accredited • Calibrated Test Weights & Shackles',
-      tag: 'Crane Proof Load & Rigging (1 / 6)'
-    },
-    {
-      image: 'assets/hero-safety-training-hd.jpg',
-      thumb: 'assets/hero-safety-training-hd.jpg',
-      badge: 'HSE Competency Training',
-      title: 'Work at Heights & Fall Protection Training',
-      desc: 'EIAC Accredited • Harness Inspection & 100% Tie-Off Compliance',
-      tag: 'Fall Protection & Safety Training (2 / 6)'
-    },
-    {
-      image: 'assets/hero-industrial-safety-hd.jpg',
-      thumb: 'assets/hero-industrial-safety-hd.jpg',
-      badge: 'Site Safety Audit',
-      title: 'Third-Party Structural & Equipment Safety Verification',
-      desc: 'ISO / IEC 17020 Inspection Standards • Certified Safety Engineers',
-      tag: 'Structural Safety Verification (3 / 6)'
-    },
-    {
-      image: 'assets/inspections/bollard-pull-marine.jpg',
-      thumb: 'assets/inspections/bollard-pull-marine.jpg',
-      badge: 'Marine & Offshore Proof',
-      title: 'Offshore Marine Bollard Pull & Winch Load Certification',
-      desc: 'Calibrated 200T Load Cell • Dynamic Tension Testing • Maritime Standards',
-      tag: 'Marine Bollard Pull Proof (4 / 6)'
-    },
-    {
-      image: 'assets/inspections/ndt-testing.jpg',
-      thumb: 'assets/inspections/ndt-testing.jpg',
-      badge: 'Non-Destructive Testing',
-      title: 'NDT Ultrasonic, MPI & Dye Penetrant Flaw Detection',
-      desc: 'ISO 9712 Level II Inspectors • Weld Joint Integrity • Structural Verification',
-      tag: 'NDT Flaw Detection & Weld Integrity (5 / 6)'
-    },
-    {
-      image: 'assets/inspections/bmu-cradle-inspection.jpg',
-      thumb: 'assets/inspections/bmu-cradle-inspection.jpg',
-      badge: 'Facade & Height Safety',
-      title: 'BMU Building Cradle & Suspended Access Proof Testing',
-      desc: 'EN 1808 Standard • Fall Arrest Systems • Emergency Descent Verification',
-      tag: 'Window & BMU Cradle Certification (6 / 6)'
-    }
-  ];
-
-  // Preload all slideshow images for instant butter-smooth transitions
-  inspectionSlides.forEach(slide => {
-    const img = new Image();
-    img.src = slide.image;
-    if (slide.thumb) {
-      const thumbImg = new Image();
-      thumbImg.src = slide.thumb;
-    }
-  });
-
-  let currentSlideIndex = 0;
-  let autoSlideTimer = null;
-  const AUTO_SLIDE_DELAY = 6000; // 6 seconds per slide
-
-  function applySlide(index) {
-    if (!backdrop) return;
-    currentSlideIndex = (index + inspectionSlides.length) % inspectionSlides.length;
-    const slide = inspectionSlides[currentSlideIndex];
-
-    // Smooth crossfade backdrop
-    backdrop.style.opacity = '0.35';
-
-    // If video was playing, pause it to showcase the inspection photo
-    if (video && !video.paused) {
-      video.pause();
-      video.classList.remove('video-playing');
-      if (toggleText) toggleText.textContent = 'Play Video Loop';
+  // Helper to update toggle button UI
+  function updateVideoUI(isPlaying) {
+    if (!toggleBtn) return;
+    if (isPlaying) {
+      if (video) video.classList.remove('video-paused');
+      if (toggleText) toggleText.textContent = 'Pause Video';
       if (toggleIcon) {
-        toggleIcon.innerHTML = `<polygon points="5 3 19 12 5 21 5 3" fill="currentColor"></polygon>`;
+        toggleIcon.innerHTML = `
+          <rect x="6" y="4" width="4" height="16" fill="currentColor"></rect>
+          <rect x="14" y="4" width="4" height="16" fill="currentColor"></rect>
+        `;
       }
-    }
-
-    setTimeout(() => {
-      backdrop.style.backgroundImage = `url('${slide.image}')`;
-      backdrop.style.opacity = '1';
-    }, 200);
-
-    // Update Floating Scene Intel Card
-    if (sceneIntel) {
-      const thumbEl = sceneIntel.querySelector('.hero-scene-thumb img');
-      const badgeEl = sceneIntel.querySelector('.hero-scene-badge');
-      const titleEl = sceneIntel.querySelector('.hero-scene-title');
-      const descEl = sceneIntel.querySelector('.hero-scene-desc');
-
-      if (thumbEl) {
-        thumbEl.src = slide.thumb;
-        thumbEl.alt = slide.title;
+      toggleBtn.setAttribute('aria-label', 'Pause background video');
+    } else {
+      if (video) video.classList.add('video-paused');
+      if (toggleText) toggleText.textContent = 'Play Video';
+      if (toggleIcon) {
+        toggleIcon.innerHTML = `
+          <polygon points="5 3 19 12 5 21 5 3" fill="currentColor"></polygon>
+        `;
       }
-      if (badgeEl) badgeEl.textContent = slide.badge;
-      if (titleEl) titleEl.textContent = slide.title;
-      if (descEl) descEl.textContent = slide.desc;
-    }
-
-    // Update Dots Navigation
-    slideDots.forEach((dot, dotIdx) => {
-      const isActive = dotIdx === currentSlideIndex;
-      dot.classList.toggle('active', isActive);
-      dot.setAttribute('aria-selected', isActive ? 'true' : 'false');
-    });
-
-    // Update Hint Counter
-    if (slideCounter) {
-      slideCounter.textContent = `Click hero to change • ${slide.tag}`;
+      toggleBtn.setAttribute('aria-label', 'Play background video');
     }
   }
 
-  function nextSlide() {
-    applySlide(currentSlideIndex + 1);
+  // Robust Autoplay Manager
+  function playVideo() {
+    if (!video) return;
+    video.muted = true;
+    video.playsInline = true;
+    video.loop = true;
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
+        updateVideoUI(true);
+      }).catch(err => {
+        console.warn('Autoplay deferred until user interaction:', err);
+        updateVideoUI(false);
+      });
+    }
   }
 
-  function restartAutoTimer() {
-    if (autoSlideTimer) clearInterval(autoSlideTimer);
-    autoSlideTimer = setInterval(nextSlide, AUTO_SLIDE_DELAY);
-  }
+  // Trigger autoplay immediately on load
+  playVideo();
 
-  // Start automatic slideshow
-  restartAutoTimer();
-
-  // Click on hero dots
-  slideDots.forEach(dot => {
-    dot.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const targetIndex = parseInt(dot.getAttribute('data-slide'), 10);
-      if (!isNaN(targetIndex)) {
-        applySlide(targetIndex);
-        restartAutoTimer();
-      }
-    });
+  // One-time listener to start video on first user interaction if browser policy deferred it
+  const onFirstInteraction = () => {
+    if (video && video.paused) {
+      playVideo();
+    }
+  };
+  ['click', 'touchstart', 'scroll'].forEach(evt => {
+    window.addEventListener(evt, onFirstInteraction, { once: true, passive: true });
   });
-
-  // Click on technical scene intel card
-  if (sceneIntel) {
-    sceneIntel.addEventListener('click', (e) => {
-      e.stopPropagation();
-      nextSlide();
-      restartAutoTimer();
-    });
-  }
-
-  // Click anywhere on hero section to change to next inspection image
-  // (Ignoring clicks on action buttons, links, inputs, and video controls)
-  if (heroSection) {
-    heroSection.addEventListener('click', (e) => {
-      if (e.target.closest('a, button, input, select, textarea, .nav-container')) {
-        return;
-      }
-      nextSlide();
-      restartAutoTimer();
-    });
-  }
 
   // Video play/pause toggle controller
   if (video && toggleBtn) {
     toggleBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       if (video.paused) {
-        video.play().then(() => {
-          video.classList.add('video-playing');
-          if (toggleText) toggleText.textContent = 'Pause Video Loop';
-          if (toggleIcon) {
-            toggleIcon.innerHTML = `
-              <rect x="6" y="4" width="4" height="16" fill="currentColor"></rect>
-              <rect x="14" y="4" width="4" height="16" fill="currentColor"></rect>
-            `;
-          }
-          toggleBtn.setAttribute('aria-label', 'Pause background video');
-        }).catch(err => console.log('Autoplay blocked or play error:', err));
+        playVideo();
       } else {
         video.pause();
-        video.classList.remove('video-playing');
-        if (toggleText) toggleText.textContent = 'Play Video Loop';
-        if (toggleIcon) {
-          toggleIcon.innerHTML = `
-            <polygon points="5 3 19 12 5 21 5 3" fill="currentColor"></polygon>
-          `;
-        }
-        toggleBtn.setAttribute('aria-label', 'Play background video');
+        updateVideoUI(false);
       }
     });
   }
