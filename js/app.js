@@ -875,8 +875,8 @@ function initActiveNavLink() {
     const homeLink = document.querySelector('.nav-link[href="index.html"]');
     if (homeLink) homeLink.classList.add('active');
 
-    // 2. Scroll spy for section anchors: #about, #why-us, #contact
-    const sectionIds = ['about', 'why-us', 'contact'];
+    // 2. Scroll spy for section anchors: #about, #contact
+    const sectionIds = ['about', 'contact'];
     const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
 
     if (sections.length > 0 && 'IntersectionObserver' in window) {
