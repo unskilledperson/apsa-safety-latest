@@ -1436,12 +1436,20 @@ img, video {
   z-index: 2;
   opacity: 1;
   transition: opacity 0.5s ease;
-  pointer-events: none;
+  pointer-events: none !important;
   filter: brightness(1.1) contrast(1.05) saturate(1.05);
 }
 
-.hero-video.video-paused {
-  opacity: 0.35;
+.hero-video::-webkit-media-controls,
+.hero-video::-webkit-media-controls-enclosure,
+.hero-video::-webkit-media-controls-panel,
+.hero-video::-webkit-media-controls-play-button,
+.hero-video::-webkit-media-controls-start-playback-button,
+.hero-video::-webkit-media-controls-overlay-play-button {
+  display: none !important;
+  -webkit-appearance: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
 }
 
 .hero-overlay {
@@ -1674,36 +1682,6 @@ img, video {
   width: 14px;
   height: 14px;
   color: #D8B4FE;
-}
-
-.video-control-btn {
-  position: absolute;
-  bottom: 114px;
-  right: 36px;
-  z-index: 20;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(5, 5, 5, 0.85);
-  border: 1.5px solid rgba(126, 103, 184, 0.45);
-  color: var(--white);
-  padding: 8px 16px;
-  border-radius: var(--radius-sm);
-  font-size: 0.8rem;
-  font-weight: 600;
-  backdrop-filter: blur(8px);
-  transition: all var(--transition-fast);
-}
-.video-control-btn:hover {
-  background: var(--apsa-purple);
-  border-color: var(--apsa-purple);
-}
-
-@media (max-width: 991px) {
-  .video-control-btn {
-    bottom: 24px;
-    right: 20px;
-  }
 }
 
 /* Interactive Inspection Slides Navigation Dots & Counter Hint */
@@ -2963,17 +2941,11 @@ img, video {
     gap: 8px;
   }
 
-  /* Video Control Button on Mobile */
-  .video-control-btn {
-    bottom: 14px;
-    right: 14px;
-    padding: 6px 12px;
-    font-size: 0.72rem;
-  }
-
   /* About Section on Mobile */
   .about-main-img {
-    height: 260px;
+    height: auto;
+    max-height: 420px;
+    object-fit: contain;
     border-radius: var(--radius-lg);
   }
   .about-stats-card { 

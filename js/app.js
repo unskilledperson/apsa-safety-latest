@@ -188,52 +188,20 @@ function initSidebarDrawer() {
 }
 
 /* --------------------------------------------------------------------------
-   2. Hero Video Controller (Pure Video-First Hero)
+   2. Hero Video Controller (Pure Ambient Continuous Loop)
 -------------------------------------------------------------------------- */
 function initHeroVideo() {
   const video = document.getElementById('heroVideo');
-  const toggleBtn = document.getElementById('videoToggleBtn');
-  const toggleText = document.getElementById('videoToggleText');
-  const toggleIcon = document.getElementById('videoToggleIcon');
+  if (!video) return;
 
-  // Helper to update toggle button UI
-  function updateVideoUI(isPlaying) {
-    if (!toggleBtn) return;
-    if (isPlaying) {
-      if (video) video.classList.remove('video-paused');
-      if (toggleText) toggleText.textContent = 'Pause Video';
-      if (toggleIcon) {
-        toggleIcon.innerHTML = `
-          <rect x="6" y="4" width="4" height="16" fill="currentColor"></rect>
-          <rect x="14" y="4" width="4" height="16" fill="currentColor"></rect>
-        `;
-      }
-      toggleBtn.setAttribute('aria-label', 'Pause background video');
-    } else {
-      if (video) video.classList.add('video-paused');
-      if (toggleText) toggleText.textContent = 'Play Video';
-      if (toggleIcon) {
-        toggleIcon.innerHTML = `
-          <polygon points="5 3 19 12 5 21 5 3" fill="currentColor"></polygon>
-        `;
-      }
-      toggleBtn.setAttribute('aria-label', 'Play background video');
-    }
-  }
-
-  // Robust Autoplay Manager
   function playVideo() {
-    if (!video) return;
     video.muted = true;
     video.playsInline = true;
     video.loop = true;
     const playPromise = video.play();
     if (playPromise !== undefined) {
-      playPromise.then(() => {
-        updateVideoUI(true);
-      }).catch(err => {
+      playPromise.catch(err => {
         console.warn('Autoplay deferred until user interaction:', err);
-        updateVideoUI(false);
       });
     }
   }
@@ -241,28 +209,15 @@ function initHeroVideo() {
   // Trigger autoplay immediately on load
   playVideo();
 
-  // One-time listener to start video on first user interaction if browser policy deferred it
+  // Ensure continuous ambient playback on any user interaction if browser policy deferred it
   const onFirstInteraction = () => {
-    if (video && video.paused) {
+    if (video.paused) {
       playVideo();
     }
   };
   ['click', 'touchstart', 'scroll'].forEach(evt => {
     window.addEventListener(evt, onFirstInteraction, { once: true, passive: true });
   });
-
-  // Video play/pause toggle controller
-  if (video && toggleBtn) {
-    toggleBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      if (video.paused) {
-        playVideo();
-      } else {
-        video.pause();
-        updateVideoUI(false);
-      }
-    });
-  }
 }
 
 /* --------------------------------------------------------------------------
