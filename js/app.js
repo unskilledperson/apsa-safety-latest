@@ -1,6 +1,6 @@
 /**
  * APSA SAFETY CONSULTANCY - Interactive Frontend Engine
- * Featuring ABCON-style Sidebar Drawer, Certificate Verification, & Floating Widgets
+ * Featuring APSA-style Sidebar Drawer, Certificate Verification, & Floating Widgets
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -208,7 +208,7 @@ function initHeroVideo() {
       thumb: 'assets/hero-crane-inspection-hd.jpg',
       badge: 'Heavy Lifting & Cranes',
       title: 'Heavy Crane Proof Load & Rigging Inspection',
-      desc: 'EIAC & ENAS Accredited • Calibrated Test Weights & Shackles',
+      desc: 'EIAC Accredited • Calibrated Test Weights & Shackles',
       tag: 'Crane Proof Load & Rigging (1 / 6)'
     },
     {
@@ -216,7 +216,7 @@ function initHeroVideo() {
       thumb: 'assets/hero-safety-training-hd.jpg',
       badge: 'HSE Competency Training',
       title: 'Work at Heights & Fall Protection Training',
-      desc: 'KHDA Approved • Harness Inspection & 100% Tie-Off Compliance',
+      desc: 'EIAC Accredited • Harness Inspection & 100% Tie-Off Compliance',
       tag: 'Fall Protection & Safety Training (2 / 6)'
     },
     {
@@ -417,7 +417,7 @@ function initBackToTop() {
 }
 
 /* --------------------------------------------------------------------------
-   4. Certificate Verification Modal & Lookup (ABCON-Style)
+   4. Certificate Verification Modal & Lookup (APSA-style)
 -------------------------------------------------------------------------- */
 function initCertVerification() {
   const certModal = document.getElementById('certModal');
@@ -444,7 +444,7 @@ function initCertVerification() {
     const certNumber = document.getElementById('certNumberInput')?.value.trim();
     const submitBtn = certForm.querySelector('button[type="submit"]');
 
-    if (submitBtn) submitBtn.textContent = 'Verifying with EIAC/KHDA database...';
+    if (submitBtn) submitBtn.textContent = 'Verifying with EIAC database...';
 
     setTimeout(() => {
       if (submitBtn) submitBtn.textContent = 'Verify Certificate';
@@ -458,7 +458,7 @@ function initCertVerification() {
             </div>
             <div style="font-size: 0.875rem; color: #CBD5E1; line-height: 1.6;">
               <strong>Certificate No:</strong> ${certNumber || 'APSA-2026-8891'}<br>
-              <strong>Accreditation Body:</strong> EIAC / KHDA Dubai Registered<br>
+              <strong>Accreditation Body:</strong> EIAC Registered<br>
               <strong>Status:</strong> Active & Compliant with UAE HSE Standards
             </div>
           </div>
