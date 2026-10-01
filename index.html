@@ -1026,7 +1026,7 @@
 
   </main>
 
-  <!-- 10. Site Footer (APSA-style Detailed Directory) -->
+  <!-- 10. Site Footer (Modern Minimalist Dark Glass Theme) -->
   <footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
@@ -1035,9 +1035,16 @@
             <img src="assets/logo-light.png" alt="Apsa Safety Consultancy" class="logo-img" width="160" height="48">
           </a>
           <p>Apsa Safety Consultancy is your trusted UAE partner for comprehensive safety solutions, professional training, and regulatory compliance accredited by EIAC.</p>
-          <div style="font-size: 0.825rem; color: #94A3B8;">
-            Accredited by Emirates International Accreditation Centre (EIAC).
+          
+          <div class="footer-eiac-badge">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
+            <span>EIAC Accredited Inspection Body &amp; Training</span>
           </div>
+
+          <button type="button" class="btn-verify-cert open-cert-modal" aria-label="Verify Certificate or Inspection Report">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <span>Verify Certificate Registry</span>
+          </button>
 
           <!-- Footer Social Links -->
           <div class="footer-social-wrapper">
@@ -1062,50 +1069,78 @@
         <div class="footer-col">
           <h4>Quick Links</h4>
           <ul class="footer-links">
-            <li><a href="index.html"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg> Home</a></li>
-            <li><a href="index.html#about"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg> About Us</a></li>
-            <li><a href="inspections.html"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg> Third-Party Inspections</a></li>
-            <li><a href="training.html"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg> 100+ Training Courses</a></li>
-            <li><a href="consultation.html"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg> Request Consultation</a></li>
-            <li><a href="index.html#contact"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg> Contact Us</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#about">About Us</a></li>
+            <li><a href="inspections.html">Third-Party Inspections</a></li>
+            <li><a href="training.html">100+ Training Courses</a></li>
+            <li><a href="index.html#contact">Contact Us</a></li>
           </ul>
         </div>
 
         <div class="footer-col">
-          <h4>Our Services</h4>
+          <h4>Accredited Services</h4>
           <ul class="footer-links">
-            <li><a href="inspections.html"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg> Third Party Inspection</a></li>
-            <li><a href="inspections.html#disciplines"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg> Lifting Equipment Inspection</a></li>
-            <li><a href="inspections.html#disciplines"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg> Bollard Pull Vessel Tests</a></li>
-            <li><a href="inspections.html#disciplines"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg> NDT Services (MPI / UT / PT)</a></li>
-            <li><a href="training.html"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg> 100+ Certified HSE Courses</a></li>
-            <li><a href="consultation.html"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg> Request Custom Proposal</a></li>
+            <li><a href="inspections.html">Third Party Inspection</a></li>
+            <li><a href="inspections.html#disciplines">Lifting Equipment Inspection</a></li>
+            <li><a href="inspections.html#disciplines">Bollard Pull Vessel Tests</a></li>
+            <li><a href="inspections.html#disciplines">NDT Services (MPI / UT / PT)</a></li>
+            <li><a href="training.html">100+ Certified HSE Courses</a></li>
           </ul>
         </div>
 
         <div class="footer-col">
           <h4>Contact Info</h4>
-          <p style="color: #CBD5E1; font-size: 0.9rem; margin-bottom: 10px;">
-            <strong>Dubai Headquarters</strong><br>
-            United Arab Emirates
-          </p>
-          <p style="color: #CBD5E1; font-size: 0.9rem; margin-bottom: 10px;">
-            <strong>Phone:</strong> <a href="tel:+971561620009" style="color: var(--cyan-400);">+971 56 162 0009</a>
-          </p>
-          <p style="color: #CBD5E1; font-size: 0.9rem; margin-bottom: 10px;">
-            <strong>Email:</strong> <a href="mailto:info@apsasafety.com" style="color: var(--cyan-400);">info@apsasafety.com</a>
-          </p>
-          <p style="color: #94A3B8; font-size: 0.85rem;">
-            Sun - Thu: 8:00 AM - 6:00 PM
-          </p>
+          <div class="footer-contact-list">
+            <div class="footer-contact-item">
+              <div class="footer-contact-icon">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              </div>
+              <div>
+                <strong style="color: #FFFFFF; display: block; font-size: 0.88rem; margin-bottom: 2px;">Dubai Headquarters</strong>
+                <span>United Arab Emirates</span>
+              </div>
+            </div>
+
+            <div class="footer-contact-item">
+              <div class="footer-contact-icon">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              </div>
+              <div>
+                <span style="display: block; font-size: 0.72rem; color: #64748B; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">Phone</span>
+                <a href="tel:+971561620009" class="footer-contact-link">+971 56 162 0009</a>
+              </div>
+            </div>
+
+            <div class="footer-contact-item">
+              <div class="footer-contact-icon">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              </div>
+              <div>
+                <span style="display: block; font-size: 0.72rem; color: #64748B; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">Email</span>
+                <a href="mailto:info@apsasafety.com" class="footer-contact-link">info@apsasafety.com</a>
+              </div>
+            </div>
+
+            <div class="footer-contact-item">
+              <div class="footer-contact-icon">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              </div>
+              <div>
+                <span style="display: block; font-size: 0.72rem; color: #64748B; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">Working Hours</span>
+                <span>Sun &ndash; Thu: 8:00 AM &ndash; 6:00 PM</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
       <div class="footer-bottom">
         <div>&copy; 2026 Apsa Safety Consultancy LLC. All rights reserved.</div>
-        <div style="display: flex; gap: 24px;">
+        <div class="footer-legal-links">
           <a href="#">Privacy Policy</a>
+          <span class="footer-dot-sep">&bull;</span>
           <a href="#">Terms of Service</a>
+          <span class="footer-dot-sep">&bull;</span>
           <a href="#" class="open-cert-modal">Verify Certificate</a>
         </div>
       </div>
