@@ -3403,17 +3403,17 @@ img, video {
 /* Page-specific background image fallbacks */
 .hero-inspections .subpage-hero-backdrop,
 .subpage-hero-inspections .subpage-hero-backdrop {
-  background-image: url('../assets/inspections/cranes-inspection.jpg');
+  background-image: url('../assets/inspections/cranes-inspection.webp');
 }
 
 .hero-training .subpage-hero-backdrop,
 .subpage-hero-training .subpage-hero-backdrop {
-  background-image: url('../assets/hero-scaffold-training.jpg');
+  background-image: url('../assets/hero-scaffold-training.webp');
 }
 
 .hero-consultation .subpage-hero-backdrop,
 .subpage-hero-consultation .subpage-hero-backdrop {
-  background-image: url('../assets/hero-poster.jpg');
+  background-image: url('../assets/hero-poster.webp');
 }
 
 .subpage-hero-overlay {
